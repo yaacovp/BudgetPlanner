@@ -7,7 +7,8 @@ import { ReactNode, useState } from "react";
 const navItems = [
   { href: "/", label: "Dashboard" },
   { href: "/transactions", label: "Transactions" },
-  { href: "/stats", label: "Statistiques" }
+  { href: "/stats", label: "Statistiques" },
+  { href: "/comptes", label: "Comptes" }
 ];
 
 export function ClientLayout({ children }: { children: ReactNode }) {

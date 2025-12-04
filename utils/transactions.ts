@@ -89,6 +89,7 @@ export interface TransactionFilters {
   month?: Date;
   type?: "depense" | "entree" | "tous";
   recurrence?: "unique" | "mensuelle" | "tous";
+  compteId?: string | "tous";
 }
 
 export function filterTransactions(
@@ -109,6 +110,14 @@ export function filterTransactions(
       t.recurrence !== filters.recurrence
     ) {
       return false;
+    }
+    if (filters.compteId && filters.compteId !== "tous") {
+      if (filters.compteId === "none" && t.compte_id !== null) {
+        return false;
+      }
+      if (filters.compteId !== "none" && t.compte_id !== filters.compteId) {
+        return false;
+      }
     }
     return true;
   });

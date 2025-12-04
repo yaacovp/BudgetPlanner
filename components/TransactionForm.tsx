@@ -7,6 +7,7 @@ import type {
   TransactionRecurrence,
   TransactionType
 } from "@/types/transaction";
+import { CompteAutocomplete } from "@/components/CompteAutocomplete";
 import { format } from "date-fns";
 
 interface Props {
@@ -28,6 +29,9 @@ export function TransactionForm({ initial, onSubmit, onClose }: Props) {
   );
   const [date, setDate] = useState(
     initial ? format(new Date(initial.date), "yyyy-MM-dd") : format(new Date(), "yyyy-MM-dd")
+  );
+  const [compteId, setCompteId] = useState<string | null>(
+    initial?.compte_id ?? null
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +55,8 @@ export function TransactionForm({ initial, onSubmit, onClose }: Props) {
         commentaire,
         type,
         recurrence,
-        date: new Date(date).toISOString()
+        date: new Date(date).toISOString(),
+        compte_id: compteId ?? null
       });
     } finally {
       setIsSubmitting(false);
@@ -128,6 +133,7 @@ export function TransactionForm({ initial, onSubmit, onClose }: Props) {
               required
             />
           </div>
+          <CompteAutocomplete value={compteId} onChange={setCompteId} />
           {error && <p className="text-xs text-red-400">{error}</p>}
           <div className="flex justify-end gap-2 pt-2">
             <button

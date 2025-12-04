@@ -54,7 +54,8 @@ export function useTransactions(): UseTransactionsResult {
           type: payload.type,
           recurrence: payload.recurrence,
           date: payload.date,
-          commentaire: payload.commentaire || null
+          commentaire: payload.commentaire || null,
+          compte_id: payload.compte_id ?? null
         } as any) // ← Ajout de 'as any'
         .select()
         .single();
@@ -79,6 +80,7 @@ export function useTransactions(): UseTransactionsResult {
       if (payload.recurrence !== undefined) updateData.recurrence = payload.recurrence;
       if (payload.date !== undefined) updateData.date = payload.date;
       if (payload.commentaire !== undefined) updateData.commentaire = payload.commentaire || null;
+      if (payload.compte_id !== undefined) updateData.compte_id = payload.compte_id ?? null;
 
       const { data, error } = await supabase
         .from("transactions")

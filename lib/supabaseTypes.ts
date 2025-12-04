@@ -19,6 +19,7 @@ export interface Database {
           date: string;
           created_at: string;
           updated_at: string | null;
+          compte_id: string | null;
         };
         Insert: {
           id?: string;
@@ -29,6 +30,7 @@ export interface Database {
           date: string;
           created_at?: string;
           updated_at?: string | null;
+          compte_id?: string | null;
         };
         Update: {
           id?: string;
@@ -39,6 +41,33 @@ export interface Database {
           date?: string;
           created_at?: string;
           updated_at?: string | null;
+          compte_id?: string | null;
+        };
+      };
+      comptes: {
+        Row: {
+          id: string;
+          intitule: string;
+          nom_banque: string;
+          solde_initial: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          intitule: string;
+          nom_banque: string;
+          solde_initial?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          intitule?: string;
+          nom_banque?: string;
+          solde_initial?: number;
+          created_at?: string;
+          updated_at?: string;
         };
       };
     };

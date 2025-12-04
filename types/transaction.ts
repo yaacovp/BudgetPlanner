@@ -7,6 +7,7 @@ export interface TransactionBase {
   type: TransactionType;
   recurrence: TransactionRecurrence;
   date: string; // ISO string
+  compte_id?: string | null;
 }
 
 export interface Transaction extends TransactionBase {

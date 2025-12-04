@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { addMonths, format, startOfMonth } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useTransactions } from "@/hooks/useTransactions";
+import { useComptes } from "@/hooks/useComptes";
 import { filterTransactions, TransactionFilters } from "@/utils/transactions";
 import { TransactionTable } from "@/components/TransactionTable";
 import { TransactionForm } from "@/components/TransactionForm";
@@ -17,6 +18,7 @@ export default function TransactionsPage() {
 
   const { transactions, isLoading, error, createTransaction, updateTransaction, deleteTransaction } =
     useTransactions();
+  const { comptes } = useComptes();
 
   const filtered = useMemo(
     () => filterTransactions(transactions, filters),
@@ -57,7 +59,7 @@ export default function TransactionsPage() {
         </button>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-5">
         <div className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 md:col-span-2">
           <button
             type="button"
@@ -119,6 +121,26 @@ export default function TransactionsPage() {
             <option value="tous">Toutes</option>
             <option value="unique">Unique</option>
             <option value="mensuelle">Mensuelle</option>
+          </select>
+        </div>
+        <div className="space-y-1">
+          <label className="text-xs text-slate-300">Compte</label>
+          <select
+            value={filters.compteId ?? "tous"}
+            onChange={(e) =>
+              setFilters((f) => ({
+                ...f,
+                compteId: e.target.value as TransactionFilters["compteId"]
+              }))
+            }
+          >
+            <option value="tous">Tous les comptes</option>
+            <option value="none">Sans compte</option>
+            {comptes.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.intitule} – {c.nom_banque}
+              </option>
+            ))}
           </select>
         </div>
       </div>
