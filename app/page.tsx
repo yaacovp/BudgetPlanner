@@ -1,5 +1,5 @@
 "use client";
-/*
+
 import { useMemo, useState } from "react";
 import { addMonths, format, startOfMonth } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -111,18 +111,3 @@ export default function DashboardPage() {
 }
 
 
-*/
-
-
-export default function DashboardPage() {
-  return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-semibold tracking-tight">
-        Test Dashboard
-      </h1>
-      <p className="text-sm text-slate-400">
-        Si tu vois ce texte, le problème vient probablement de Supabase ou des données
-      </p>
-    </div>
-  );
-}
